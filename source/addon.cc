@@ -1,7 +1,7 @@
 #include "mouse.h"
 
-void Initialize(Handle<Object> exports) {
-	Mouse::Initialize(exports);
-}
+using namespace v8;
+
+void Initialize(Handle<Object> exports) { Mouse::Initialize(exports); }
 
 NODE_MODULE(addon, Initialize)
