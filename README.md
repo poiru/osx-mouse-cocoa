@@ -2,7 +2,7 @@
 
 Mouse tracking for macOS. Receive the screen position of various mouse events.
 
-  npm install osx-mouse-cocoa
+    npm install osx-mouse-cocoa
 
 This is a fork of [osx-mouse](https://github.com/kapetan/osx-mouse) that works on macOS Mojave without accessibility permissions. Unlike `osx-mouse`, the events are only emitted when the application is in focused. Even when the application is unfocused, `move` events are still generated when hovering over the application windows.
 
