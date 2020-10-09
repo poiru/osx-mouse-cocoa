@@ -1,6 +1,9 @@
 #include "mouse.h"
 
+#import <node.h>
 #import <Cocoa/Cocoa.h>
+
+#define countof(ar) (sizeof(ar)/sizeof(*(ar)))
 
 using namespace v8;
 
@@ -56,14 +59,14 @@ Mouse::Mouse(Nan::Callback *callback) {
                                          Nan::New<Number>(location.x),
                                          Nan::New<Number>(location.y)};
 
-                                     event_callback->Call(3, argv);
+                                     Nan::Call(*event_callback, countof(argv), argv);
                                      return e;
                                    }];
 }
 
 Mouse::~Mouse() { Stop(); }
 
-void Mouse::Initialize(Local<Object> exports) {
+void Mouse::Initialize(Nan::ADDON_REGISTER_FUNCTION_ARGS_TYPE exports) {
   Nan::HandleScope scope;
 
   Local<FunctionTemplate> tpl = Nan::New<FunctionTemplate>(Mouse::New);
@@ -74,8 +77,12 @@ void Mouse::Initialize(Local<Object> exports) {
   Nan::SetPrototypeMethod(tpl, "ref", Mouse::AddRef);
   Nan::SetPrototypeMethod(tpl, "unref", Mouse::RemoveRef);
 
-  Mouse::constructor.Reset(tpl->GetFunction());
-  exports->Set(Nan::New<String>("Mouse").ToLocalChecked(), tpl->GetFunction());
+  auto func = Nan::GetFunction(tpl).ToLocalChecked();
+  Mouse::constructor.Reset(func);
+  Nan::Set(
+      exports,
+      Nan::New<String>("Mouse").ToLocalChecked(),
+      func);
 }
 
 void Mouse::Stop() {
