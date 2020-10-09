@@ -1,5 +1,5 @@
-#ifndef _MOUSE_H
-#define _MOUSE_H
+#ifndef MOUSE_H
+#define MOUSE_H
 
 #include <nan.h>
 

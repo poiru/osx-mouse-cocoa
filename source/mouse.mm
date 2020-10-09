@@ -9,6 +9,7 @@ using namespace v8;
 
 Nan::Persistent<Function> Mouse::constructor;
 
+namespace {
 const char *NSEventTypeToString(NSEventType type) {
   switch (type) {
   case NSEventTypeLeftMouseDown:
@@ -28,6 +29,7 @@ const char *NSEventTypeToString(NSEventType type) {
   default:
     return nullptr;
   }
+}
 }
 
 Mouse::Mouse(Nan::Callback *callback) {
@@ -91,8 +93,8 @@ void Mouse::Stop() {
   }
   stopped = true;
 
-  [NSEvent removeMonitor:(id)event_monitor];
-  event_monitor = nullptr;
+  [NSEvent removeMonitor:static_cast<id>(event_monitor)];
+  event_monitor = nil;
 }
 
 NAN_METHOD(Mouse::New) {
