@@ -5,7 +5,7 @@
 			"sources": ["source/addon.cc", "source/mouse.mm"],
 			"link_settings": {
 				"libraries": [
-					"/System/Library/Frameworks/ApplicationServices.framework"
+					"/System/Library/Frameworks/Cocoa.framework"
 				]
 			},
 			"include_dirs": [
