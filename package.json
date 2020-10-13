@@ -1,6 +1,6 @@
 {
   "name": "osx-mouse-cocoa",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Mouse tracking for macOS using Cocoa APIs",
   "main": "index.js",
   "scripts": {
